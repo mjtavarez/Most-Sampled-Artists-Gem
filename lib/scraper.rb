@@ -30,7 +30,6 @@ class Scraper
         year_released: song.css('span.trackYear').text[/(\d+)/].delete("(",")"),
         song_url: "http://www.whosampled.com" + "#{song.css('a[itemprop = sameAs]').attribute('href').value}"
       }
-
     end
     songs
   end
@@ -39,31 +38,11 @@ class Scraper
     song_page = Nokogiri::HTML(open(song_url))
 
     songs_using_sample = []
-    song_attributes = {}
-    # sampling_artist = song_page.css('div.listEntry span.trackArtist a')
-    sampling_artist = song_page.css('div.listEntry span.trackArtist a')
-    # puts sampling_artist
-
-    # sampling_artist.each do |artist|
-    #   songs_using_sample[:sampling_artist] = artist.text
-    # end
 
     song_page.css('div.listEntry').each do |sample_track|
-      # artist = []
-      # artist << sample_track.css('span.trackArtist a').each do |artist|
-      #   puts artist.text
-      # end
-
-      # puts artist
-
-      # song_attributes[:sample_track_title] = sample_track.css('a.trackName').text
-      # song_attributes[:sampling_artist] = sample_track.css('span.trackArtist a').text
-      # song_attributes[:sample_date] = sample_track.css('span.trackArtist').text[/\d+/]
-      # song_attributes[:sample_url] = "http://www.whosampled.com/" + "#{sample_track.css('a.trackName').attribute('href').value}"
 
       songs_using_sample << {
         sample_track_title: sample_track.css('a.trackName').text,
-
 
         ## sampling artists has a value of an array of strings, the strings may have leading and trailing white space but it's probably
         ## best if I deal with this in one of the other classes where I create these Song and Artist objects
@@ -73,7 +52,6 @@ class Scraper
       }
     end
     songs_using_sample
-    # ""
   end
 
   def self.scrape_song_attributes(song_url)
@@ -115,20 +93,25 @@ class Scraper
 
 end
 
-# puts "Most sampled recording artists"
-# puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
+puts "Most sampled recording artists\n"
+puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
+puts "\n"
 
-# puts "Their most sampled songs\n"
-# puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
+puts "Their most sampled songs\n"
+puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
+puts "\n"
 
-# puts "The album the song originally appeared on, its producer, and the number of times it's been sampled\n"
-# puts Scraper.scrape_song_attributes("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled")
+puts "The album the song originally appeared on, its producer, and the number of times it's been sampled\n"
+puts Scraper.scrape_song_attributes("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled")
+puts "\n"
 
 puts "The songs using a sample of the original song, their artists, the year of release, and the songs' urls\n"
 puts Scraper.scrape_song_page("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled/")
+puts "\n"
 
-# puts "The sample track's genre, producer, and album"
-# puts Scraper.scrape_sample_page("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
+puts "The sample track's genre, producer, and album\n"
+puts Scraper.scrape_sample_page("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
+puts "\n"
 
-# puts "The original song's genre"
-# puts Scraper.scrape_song_genre("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
+puts "The original song's genre\n"
+puts Scraper.scrape_song_genre("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
