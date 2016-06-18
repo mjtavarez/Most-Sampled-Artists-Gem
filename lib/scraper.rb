@@ -19,6 +19,7 @@ class Scraper
     artists
   end
 
+
   def self.scrape_profile_page(artist_profile_url)
     profile = Nokogiri::HTML(open(artist_profile_url))
 
@@ -33,6 +34,7 @@ class Scraper
     end
     songs
   end
+
 
   def self.scrape_song_page(song_url)
     song_page = Nokogiri::HTML(open(song_url))
@@ -54,6 +56,7 @@ class Scraper
     songs_using_sample
   end
 
+
   def self.scrape_song_attributes(song_url)
     song_page = Nokogiri::HTML(open(song_url))
 
@@ -69,6 +72,7 @@ class Scraper
     song_attributes
   end
 
+
   def self.scrape_sample_page(sample_url)
     sample = Nokogiri::HTML(open(sample_url))
 
@@ -83,6 +87,7 @@ class Scraper
     attributes
   end
 
+
   def self.scrape_song_genre(sample_url)
     song = Nokogiri::HTML(open(sample_url))
     genre = song.css('div.sampleEntryBox:nth-child(3) div.sampleAdditionalInfoContainer div.track-metainfo:nth-child(3) a').text.delete("/").split(" ")
@@ -93,25 +98,25 @@ class Scraper
 
 end
 
-puts "Most sampled recording artists\n"
-puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
-puts "\n"
+# puts "Most sampled recording artists\n"
+# puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
+# puts "\n"
 
-puts "Their most sampled songs\n"
-puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
-puts "\n"
+# puts "Their most sampled songs\n"
+# puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
+# puts "\n"
 
-puts "The album the song originally appeared on, its producer, and the number of times it's been sampled\n"
-puts Scraper.scrape_song_attributes("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled")
-puts "\n"
+# puts "The album the song originally appeared on, its producer, and the number of times it's been sampled\n"
+# puts Scraper.scrape_song_attributes("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled")
+# puts "\n"
 
-puts "The songs using a sample of the original song, their artists, the year of release, and the songs' urls\n"
-puts Scraper.scrape_song_page("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled/")
-puts "\n"
+# puts "The songs using a sample of the original song, their artists, the year of release, and the songs' urls\n"
+# puts Scraper.scrape_song_page("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled/")
+# puts "\n"
 
-puts "The sample track's genre, producer, and album\n"
-puts Scraper.scrape_sample_page("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
-puts "\n"
+# puts "The sample track's genre, producer, and album\n"
+# puts Scraper.scrape_sample_page("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
+# puts "\n"
 
-puts "The original song's genre\n"
-puts Scraper.scrape_song_genre("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
+# puts "The original song's genre\n"
+# puts Scraper.scrape_song_genre("http://www.whosampled.com/sample/169588/Kanye-West-Big-Sean-Jay-Z-Clique-James-Brown-Funky-President-(People-It%27s-Bad)/")
