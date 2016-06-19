@@ -12,7 +12,8 @@ class Scraper
         name: artist.css('span.artistName').text,
         ranking: artist.css('span.chartCount').text,
         artist_times_sampled: artist.css('span.counts').text[/\d+/], #+ " times",
-        profile_url: "http://www.whosampled.com" + "#{artist.css('span.artistName a').attribute('href').value}"
+        # profile_url: "http://www.whosampled.com" + "#{artist.css('span.artistName a').attribute('href').value}"
+        profile_url: "http://127.0.0.1:4000/whosampled/" + "#{artist.css('span.artistName a').text}"#.attribute('href').value}"
       }
     end
     artists
@@ -28,6 +29,7 @@ class Scraper
         title: song.css('span[itemprop = name]').text,
         year_released: song.css('span.trackYear').text[/(\d+)/].delete("(",")"),
         song_url: "http://www.whosampled.com" + "#{song.css('a[itemprop = sameAs]').attribute('href').value}"
+        # song_url: "http://127.0.0.1:4000/whosampled/" + "#{song.css('a[itemprop = sameAs]').attribute('href').value}"
       }
     end
 
@@ -49,6 +51,7 @@ class Scraper
         artist: sample_track.css('span.trackArtist').text[/[^by](\D+)+[^W]?[^\(\d]/].strip.split(",").join(",").split("and").join(",").split(","),
         year_released: sample_track.css('span.trackArtist').text[/\d+/],
         song_url: "http://www.whosampled.com/" + "#{sample_track.css('a.trackName').attribute('href').value}"
+        # song_url: "http://127.0.0.1:4000/whosampled/" + "#{sample_track.css('a.trackName').attribute('href').value}"
       }
     end
     songs_using_sample
@@ -100,9 +103,10 @@ class Scraper
 
 end
 
-# puts "Most sampled recording artists\n"
+puts "Most sampled recording artists\n"
 # puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
-# puts "\n"
+puts Scraper.scrape_most_sampled_pages("http://127.0.0.1:4000/whosampled/Most%20Sampled%20Artists%20_%20WhoSampled.htm")
+puts "\n"
 
 # puts "Their most sampled songs\n"
 # puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")

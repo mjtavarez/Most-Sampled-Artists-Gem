@@ -9,6 +9,7 @@ class CommandLineInterface
   # on the current page
 
   # does that mean that I should not store the url as a constant?
-  BASE_URL = "http://www.whosampled.com/most-sampled-artists/1"
+  # BASE_URL = "http://www.whosampled.com/most-sampled-artists/1"
+  BASE_URL = "http://127.0.0.1:4000/whosampled/"
 
 end
