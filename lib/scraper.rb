@@ -105,12 +105,12 @@ end
 
 puts "Most sampled recording artists\n"
 # puts Scraper.scrape_most_sampled_pages("http://www.whosampled.com/most-sampled-artists/1/")
-puts Scraper.scrape_most_sampled_pages("http://127.0.0.1:4000/whosampled/Most%20Sampled%20Artists%20_%20WhoSampled.htm")
+# puts Scraper.scrape_most_sampled_pages("http://127.0.0.1:4000/whosampled/Most%20Sampled%20Artists%20_%20WhoSampled.htm")
 puts "\n"
 
-# puts "Their most sampled songs\n"
-# puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
-# puts "\n"
+puts "Their most sampled songs\n"
+puts Scraper.scrape_profile_page("http://www.whosampled.com/James-Brown/")
+puts "\n"
 
 # puts "The album the song originally appeared on, its producer, and the number of times it's been sampled\n"
 # puts Scraper.scrape_song_attributes("http://www.whosampled.com/James-Brown/Funky-President-(People-It%27s-Bad)/sampled")
